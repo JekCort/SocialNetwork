@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import classes from './Dialogs.module.css';
 
 type DialogItemPropsType = {
@@ -8,13 +8,12 @@ type DialogItemPropsType = {
 }
 export const DialogItem = (props: DialogItemPropsType) => {
     const path = "/Dialogs/" + props.id
-return(
-    <div className={classes.dialog + ' ' + classes.active}>
-        <NavLink to={path}>{props.name}</NavLink>
-    </div>
-)
+    return (
+        <div className={classes.dialog + ' ' + classes.active}>
+            <NavLink to={path}>{props.name}</NavLink>
+        </div>
+    )
 }
-
 
 
 type MessagePropsType = {
@@ -23,25 +22,35 @@ type MessagePropsType = {
 const Message = (props: MessagePropsType) => {
     return (
         <div className={classes.massage}>{props.massage}</div>
-        )
+    )
 }
 
 export const Dialogs = () => {
+    const dialogsData = [
+        {id: 1, name: "Bob"},
+        {id: 2, name: "Eva"},
+        {id: 3, name: "Sveta"},
+        {id: 4, name: "Viktor"},
+        {id: 5, name: "Valera"}
+    ]
+
+    const messagesData = [
+        {id: 1, message: "Hi"},
+        {id: 2, message: "How are a you"},
+        {id: 3, message: "Yo"},
+        {id: 4, message: "Yo"},
+        {id: 5, message: "Yo"}
+    ]
     return (
         <div className={classes.dialogs}>
 
             <div className={classes.dialogsItem}>
-               <DialogItem name={"Bob"} id={1}/>
-               <DialogItem name={"Eva"} id={2}/>
-               <DialogItem name={"Sveta"} id={3}/>
-               <DialogItem name={"Viktor"} id={4}/>
-               <DialogItem name={"Valera"} id={5}/>
+                <DialogItem name={dialogsData[0].name} id={dialogsData[0].id}/>
+                <DialogItem name={dialogsData[1].name} id={dialogsData[1].id}/>
             </div>
             <div className={classes.messages}>
-
-                <Message massage={"Hi"}/>
-                <Message massage={"How are a you"}/>
-                <Message massage={"Yo"}/>
+                <Message massage={messagesData[0].message}/>
+                <Message massage={messagesData[1].message}/>
             </div>
         </div>
     );
