@@ -8,47 +8,13 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
+import {dialogsPropsType, messagesPropsType, postsPropsType} from "./index";
 
 
-// type dialogPropsType = {
-//     id: number,
-//     name: string
-// }
-//
-// type dialogsPropsType = {
-//     dialogs: Array<dialogPropsType>
-// }
-//
-// type messagePropsType = {
-//     id: number,
-//     name: string
-// }
-//
-// type messagesPropsType = {
-//     messages: Array<messagePropsType>
-// }
-//
-// const dialogs = [
-//     {id: 1, name: "Bob"},
-//     {id: 2, name: "Eva"},
-//     {id: 3, name: "Sveta"},
-//     {id: 4, name: "Viktor"},
-//     {id: 5, name: "Valera"}
-// ]
-// const messages = [
-//     {id: 1, message: "Hi"},
-//     {id: 2, message: "How are a you"},
-//     {id: 3, message: "Yo"},
-//     {id: 4, message: "Yo"},
-//     {id: 5, message: "Yo"}
-// ]
+const App = (props:dialogsPropsType & messagesPropsType & postsPropsType) => {
 
-
-const HandlerDialogs = () => <Dialogs/>
-const HandlerProfile = () => <Profile/>
-
-
-const App = () => {
+    const HandlerDialogs = () => <Dialogs dialogs={props.dialogs} messages={props.messages}/>
+    const HandlerProfile = () => <Profile posts={props.posts}/>
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
