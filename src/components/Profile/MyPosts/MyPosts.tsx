@@ -1,7 +1,8 @@
 import React from 'react';
 import classes from './MyPosts.module.css';
 import {Posts} from "./Post/Posts";
-import {postsPropsType} from "../../../index";
+import {postsPropsType} from "../../../redax/state";
+
 
 export const MyPosts = (props:postsPropsType) => {
 

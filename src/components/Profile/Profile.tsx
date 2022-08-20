@@ -1,27 +1,22 @@
 import React from 'react';
 import classes from './Profile.module.css';
 import {MyPosts} from "./MyPosts/MyPosts";
-import { ProfileInfo } from './ProfileInfo/ProfileInfo';
+import {ProfileInfo} from './ProfileInfo/ProfileInfo';
+import {profilePagePropsType} from "../../redax/state";
 
-type postPropsType = {
-    id: number,
-    message: string,
-    likesCount: number
+type ProfilePropsType = {
+    state:profilePagePropsType
 }
 
-type postsPropsType = {
-    posts: Array<postPropsType>
-
-}
-
-export const Profile = (props:postsPropsType) => {
-
+export const Profile = ({state}: ProfilePropsType) => {
 
 
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={props.posts}/>
+            <MyPosts posts={state.posts}/>
         </div>
     );
 };
+
+

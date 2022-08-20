@@ -8,13 +8,16 @@ import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {dialogsPropsType, messagesPropsType, postsPropsType} from "./index";
+import {statePropsType} from "./redax/state";
 
+type AppPropsType = {
+    state: statePropsType
+}
 
-const App = (props:dialogsPropsType & messagesPropsType & postsPropsType) => {
+const App = (props: AppPropsType) => {
 
-    const HandlerDialogs = () => <Dialogs dialogs={props.dialogs} messages={props.messages}/>
-    const HandlerProfile = () => <Profile posts={props.posts}/>
+    const HandlerDialogs = () => <Dialogs state={props.state.dialogsPage}/>
+    const HandlerProfile = () => <Profile state={props.state.profilePage}/>
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
