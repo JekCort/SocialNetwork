@@ -1,18 +1,25 @@
 import React from 'react';
 import classes from './MyPosts.module.css';
 import {Posts} from "./Post/Posts";
-import {postsPropsType} from "../../../redax/state";
+import {postPropsType, postsPropsType, profilePagePropsType} from "../../../redax/state";
 
+type MyPostsPropsType = {
+    posts: Array<postPropsType>
+    addPost: (postMessage: string) => void
 
-export const MyPosts = (props: postsPropsType) => {
+}
+
+export const MyPosts = (props: MyPostsPropsType) => {
 
     const postsElements = props.posts.map(p => <Posts message={p.message} likesCount={p.likesCount}/>)
 
     const newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addPost = () => {
-        const text = newPostElement.current?.value
-        alert(text)
+        const text = newPostElement.current?.value || ''
+
+        props.addPost(text)
+        console.log(props)
     }
     return (
 

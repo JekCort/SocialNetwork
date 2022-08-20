@@ -5,16 +5,17 @@ import {ProfileInfo} from './ProfileInfo/ProfileInfo';
 import {profilePagePropsType} from "../../redax/state";
 
 type ProfilePropsType = {
-    state:profilePagePropsType
+    state: profilePagePropsType
+    addPost: (postMessage: string) => void
 }
 
-export const Profile = ({state}: ProfilePropsType) => {
+export const Profile = (props: ProfilePropsType) => {
 
 
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={state.posts}/>
+            <MyPosts posts={props.state.posts} addPost={props.addPost}/>
         </div>
     );
 };
