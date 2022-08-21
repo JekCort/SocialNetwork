@@ -8,17 +8,21 @@ import {Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {addPost, statePropsType} from "./redax/state";
+import {addPost, statePropsType, updateNewPostText} from "./redax/state";
 
 type AppPropsType = {
     state: statePropsType
-    addPost: (postMessage: string) => void
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
 }
 
 const App = (props: AppPropsType) => {
 
     const HandlerDialogs = () => <Dialogs state={props.state.dialogsPage}/>
-    const HandlerProfile = () => <Profile state={props.state.profilePage} addPost={addPost}/>
+    const HandlerProfile = () => <Profile profilePage={props.state.profilePage}
+                                          addPost={props.addPost}
+                                          updateNewPostText={props.updateNewPostText}
+    />
     return (
 
         <div className='app-wrapper'>

@@ -28,6 +28,7 @@ export type messagesPropsType = {
 
 export type profilePagePropsType = {
     posts: Array<postPropsType>
+    newPostText:string
 }
 
 export type dialogsPagePropsType = {
@@ -47,7 +48,8 @@ export const state = {
         posts: [
             {id: 1, message: "Hi, how are you?", likesCount: 15},
             {id: 2, message: "It's my first post", likesCount: 7}
-        ]
+        ],
+        newPostText:'It-kamasutra'
 
     },
     dialogsPage: {
@@ -66,15 +68,21 @@ export const state = {
             {id: 5, name: "Valera"}
         ]
     },
-    sidebar: {}
+    // sidebar: {}
 }
 
-export const addPost = (postMessage: string) => {
+export const addPost = () => {
     const newPost = {
         id: 5,
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likesCount: 0
     }
     state.profilePage.posts.push(newPost)
+    state.profilePage.newPostText = ''
+    rerenderEntireTree(state)
+}
+
+export const updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText
     rerenderEntireTree(state)
 }

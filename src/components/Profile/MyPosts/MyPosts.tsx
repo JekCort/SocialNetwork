@@ -5,7 +5,10 @@ import {postPropsType, postsPropsType, profilePagePropsType} from "../../../reda
 
 type MyPostsPropsType = {
     posts: Array<postPropsType>
-    addPost: (postMessage: string) => void
+    newPostText: string
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
+
 
 }
 
@@ -16,8 +19,13 @@ export const MyPosts = (props: MyPostsPropsType) => {
     const newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addPost = () => {
+        props.addPost()
+
+    }
+
+    const onChangeHandler = () => {
         const text = newPostElement.current?.value || ''
-        props.addPost(text)
+        props.updateNewPostText(text)
     }
     return (
 
@@ -25,7 +33,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea ref={newPostElement}></textarea>
+                    <textarea onChange={onChangeHandler} ref={newPostElement} value={props.newPostText}/>
                 </div>
                 <div>
                     <button onClick={addPost}>Add post</button>
