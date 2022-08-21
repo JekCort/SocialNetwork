@@ -1,4 +1,3 @@
-import {rerenderEntireTree} from "../render";
 
 export type postPropsType = {
     id: number,
@@ -43,6 +42,11 @@ export type statePropsType = {
 }
 
 
+
+let rerenderEntireTree = (state:statePropsType) => {
+    console.log('sdsd')
+}
+
 export const state = {
     profilePage: {
         posts: [
@@ -71,6 +75,7 @@ export const state = {
     // sidebar: {}
 }
 
+
 export const addPost = () => {
     const newPost = {
         id: 5,
@@ -85,4 +90,8 @@ export const addPost = () => {
 export const updateNewPostText = (newText: string) => {
     state.profilePage.newPostText = newText
     rerenderEntireTree(state)
+}
+
+export const subscribe = (observer:any) => {
+    rerenderEntireTree = observer
 }
