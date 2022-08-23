@@ -40,15 +40,27 @@ export type statePropsType = {
     dialogsPage: dialogsPagePropsType
 }
 
+type AddPostActionType = {
+    type: 'ADD-POST'
+}
+
+type UpdateNewPostTextType = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    newText: string
+}
+
+export type ActionsType = AddPostActionType | UpdateNewPostTextType
+
 export type  storePropsType = {
     _state: statePropsType
+    _callSubscriber: (state: statePropsType) => void
     getState: () => statePropsType
-    rerenderEntireTree: (state: statePropsType) => void
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
-    subscribe: (observer: () => void) => void
 
+    subscribe: (observer: () => void) => void
+    dispatch: (action: ActionsType) => void
 }
+
+
 
 export const store: storePropsType = {
     _state: {
@@ -78,28 +90,31 @@ export const store: storePropsType = {
         },
         // sidebar: {}
     },
+    _callSubscriber(state: statePropsType) {
+        console.log('sdsd')
+    },
+
     getState() {
         return this._state
     },
-    rerenderEntireTree(state: statePropsType) {
-        console.log('sdsd')
+    subscribe(observer) {
+        this._callSubscriber = observer
     },
-    addPost() {
-        const newPost = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0
+
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            const newPost = {
+                id: 5,
+                message: this._state.profilePage.newPostText,
+                likesCount: 0
+            }
+            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.newPostText = ''
+            this._callSubscriber(this._state)
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newText
+            this._callSubscriber(this._state)
         }
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText = ''
-        this.rerenderEntireTree(this._state)
-    },
-    updateNewPostText(newText: string) {
-        this._state.profilePage.newPostText = newText
-        this.rerenderEntireTree(this._state)
-    },
-    subscribe(observer: () => void) {
-        this.rerenderEntireTree = observer
     }
 }
 

@@ -2,12 +2,11 @@ import React from 'react';
 import classes from './Profile.module.css';
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
-import {postsPropsType, profilePagePropsType} from "../../redax/state";
+import {ActionsType, postsPropsType, profilePagePropsType} from "../../redax/state";
 
 type ProfilePropsType = {
     profilePage: profilePagePropsType
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
+    dispatch: (action: ActionsType) => void
 }
 
 export const Profile = (props: ProfilePropsType) => {
@@ -16,7 +15,7 @@ export const Profile = (props: ProfilePropsType) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={props.profilePage.posts} newPostText={props.profilePage.newPostText} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>
+            <MyPosts posts={props.profilePage.posts} newPostText={props.profilePage.newPostText} dispatch={props.dispatch} />
         </div>
     );
 };
