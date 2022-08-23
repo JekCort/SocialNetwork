@@ -1,15 +1,21 @@
 import React from 'react';
 import classes from './MyPosts.module.css';
 import {Posts} from "./Post/Posts";
-import {ActionsType, postPropsType, postsPropsType, profilePagePropsType} from "../../../redax/state";
+import {
+    ActionsType,
+    addPostActionCreator,
+    postPropsType,
+    updateNewPostCreator,
+} from "../../../redax/state";
 
 type MyPostsPropsType = {
     posts: Array<postPropsType>
     newPostText: string
     dispatch: (action: ActionsType) => void
-
-
 }
+
+
+
 
 export const MyPosts = (props: MyPostsPropsType) => {
 
@@ -18,13 +24,13 @@ export const MyPosts = (props: MyPostsPropsType) => {
     const newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const addPost = () => {
-        props.dispatch({type: 'ADD-POST'})
+        props.dispatch(addPostActionCreator())
 
     }
 
     const onChangeHandler = () => {
         const text = newPostElement.current?.value || ''
-        props.dispatch({type: 'UPDATE-NEW-POST-TEXT', newText: text})
+        props.dispatch(updateNewPostCreator(text))
     }
     return (
 
