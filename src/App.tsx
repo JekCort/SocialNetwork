@@ -8,13 +8,14 @@ import {Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {addPost, statePropsType, updateNewPostText} from "./redax/state";
+import {statePropsType} from "./redax/state";
 
 type AppPropsType = {
     state: statePropsType
     addPost: () => void
     updateNewPostText: (newText: string) => void
 }
+
 
 const App = (props: AppPropsType) => {
 
