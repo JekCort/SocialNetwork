@@ -3,12 +3,9 @@ import classes from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from './Message/Message';
 import {
-    ActionsType,
-    dialogsPagePropsType,
-    sendMessageCreator,
     storePropsType,
-    updateNewMessageBodyCreator
 } from "../../redax/state";
+import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redax/dialogs-reduser";
 
 
 type DialogsType = {

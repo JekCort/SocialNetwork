@@ -1,4 +1,6 @@
-import {text} from "stream/consumers";
+import {profileReduser} from "./profile-reduser";
+import {dialogsReduser} from "./dialogs-reduser";
+
 
 export type postPropsType = {
     id: number,
@@ -44,11 +46,11 @@ export type statePropsType = {
 }
 
 export type AddPostActionType = {
-    type: 'ADD-POST'
+    type: 'ADD_POST'
 }
 
 export type UpdateNewPostTextType = {
-    type: 'UPDATE-NEW-POST-TEXT'
+    type: 'UPDATE_NEW_POST_TEXT'
     newText: string
 }
 
@@ -64,6 +66,7 @@ export type SendMessageType = {
 
 export type ActionsType = AddPostActionType | UpdateNewPostTextType | NewMessageBodyType | SendMessageType
 
+
 export type  storePropsType = {
     _state: statePropsType
     _callSubscriber: (state: statePropsType) => void
@@ -72,12 +75,6 @@ export type  storePropsType = {
     subscribe: (observer: () => void) => void
     dispatch: (action: ActionsType) => void
 }
-
-
-const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY'
-const SEND_MESSAGE = 'SEND_MESSAGE'
 
 
 export const store: storePropsType = {
@@ -106,7 +103,7 @@ export const store: storePropsType = {
                 {id: 5, name: "Nick"},
                 {id: 6, name: "Valera"}
             ],
-            NewMessageBody:''
+            NewMessageBody: ''
         },
     },
     _callSubscriber(state: statePropsType) {
@@ -121,53 +118,32 @@ export const store: storePropsType = {
     },
 
     dispatch(action) {
-        if (action.type === ADD_POST) {
-            const newPost = {
-                id: 5,
-                message: this._state.profilePage.newPostText,
-                likesCount: 0
-            }
-            this._state.profilePage.posts.push(newPost)
-            this._state.profilePage.newPostText = ''
-            this._callSubscriber(this._state)
-        } else if (action.type === UPDATE_NEW_POST_TEXT) {
-            this._state.profilePage.newPostText = action.newText
-            this._callSubscriber(this._state)
-        }else if (action.type === UPDATE_NEW_MESSAGE_BODY){
-            this._state.dialogsPage.NewMessageBody  = action.body
-            this._callSubscriber(this._state)
-        } else if (action.type === SEND_MESSAGE){
-        const body = this._state.dialogsPage.NewMessageBody
-            this._state.dialogsPage.NewMessageBody = ''
-            this._state.dialogsPage.messages.push({id: 6, message: body})
-            this._callSubscriber(this._state)
-        }
+
+        profileReduser(this._state.profilePage ,action)
+        this._state.dialogsPage = dialogsReduser(this._state.dialogsPage, action)
+        this. _callSubscriber(this._state)
     }
 }
-export const addPostActionCreator = (): AddPostActionType => {
-    return {
-        type: ADD_POST
-    }
-};
 
-export const updateNewPostCreator = (newText: string): UpdateNewPostTextType => {
-    return {
-        type: UPDATE_NEW_POST_TEXT, newText: newText
-    }
-};
+
+
 
 export const sendMessageCreator = (): SendMessageType => {
     return {
-        type: "SEND_MESSAGE"
-    }
+        type: 'SEND_MESSAGE'
+    } as const
 };
 
 export const updateNewMessageBodyCreator = (body: string): NewMessageBodyType => {
     return {
-        type: UPDATE_NEW_MESSAGE_BODY, body: body
-    }
+        type: 'UPDATE_NEW_MESSAGE_BODY', body: body
+    } as const
 };
 
+
+// function dialogsReduser(dialogsPage: dialogsPagePropsType, action: ActionsType): dialogsPagePropsType {
+//     throw new Error("Function not implemented.");
+// }
 // let rerenderEntireTree = (state:statePropsType) => {
 //     console.log('sdsd')
 // }

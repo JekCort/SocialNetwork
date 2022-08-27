@@ -3,10 +3,9 @@ import classes from './MyPosts.module.css';
 import {Posts} from "./Post/Posts";
 import {
     ActionsType,
-    addPostActionCreator,
     postPropsType,
-    updateNewPostCreator,
 } from "../../../redax/state";
+import {addPostActionCreator, updateNewPostCreator} from "../../../redax/profile-reduser";
 
 type MyPostsPropsType = {
     posts: Array<postPropsType>
