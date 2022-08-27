@@ -1,3 +1,5 @@
+import {text} from "stream/consumers";
+
 export type postPropsType = {
     id: number,
     message: string,
@@ -32,6 +34,7 @@ export type profilePagePropsType = {
 export type dialogsPagePropsType = {
     messages: Array<messagePropsType>
     dialogs: Array<dialogPropsType>
+    NewMessageBody: string
 }
 
 
@@ -49,7 +52,17 @@ export type UpdateNewPostTextType = {
     newText: string
 }
 
-export type ActionsType = AddPostActionType | UpdateNewPostTextType
+export type NewMessageBodyType = {
+    type: 'UPDATE_NEW_MESSAGE_BODY'
+    body: string
+}
+
+export type SendMessageType = {
+    type: 'SEND_MESSAGE'
+
+}
+
+export type ActionsType = AddPostActionType | UpdateNewPostTextType | NewMessageBodyType | SendMessageType
 
 export type  storePropsType = {
     _state: statePropsType
@@ -63,6 +76,9 @@ export type  storePropsType = {
 
 const ADD_POST = 'ADD-POST'
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY'
+const SEND_MESSAGE = 'SEND_MESSAGE'
+
 
 export const store: storePropsType = {
     _state: {
@@ -87,10 +103,11 @@ export const store: storePropsType = {
                 {id: 2, name: "Eva"},
                 {id: 3, name: "Sveta"},
                 {id: 4, name: "Viktor"},
-                {id: 5, name: "Valera"}
-            ]
+                {id: 5, name: "Nick"},
+                {id: 6, name: "Valera"}
+            ],
+            NewMessageBody:''
         },
-        // sidebar: {}
     },
     _callSubscriber(state: statePropsType) {
         console.log('sdsd')
@@ -116,6 +133,14 @@ export const store: storePropsType = {
         } else if (action.type === UPDATE_NEW_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText
             this._callSubscriber(this._state)
+        }else if (action.type === UPDATE_NEW_MESSAGE_BODY){
+            this._state.dialogsPage.NewMessageBody  = action.body
+            this._callSubscriber(this._state)
+        } else if (action.type === SEND_MESSAGE){
+        const body = this._state.dialogsPage.NewMessageBody
+            this._state.dialogsPage.NewMessageBody = ''
+            this._state.dialogsPage.messages.push({id: 6, message: body})
+            this._callSubscriber(this._state)
         }
     }
 }
@@ -128,6 +153,18 @@ export const addPostActionCreator = (): AddPostActionType => {
 export const updateNewPostCreator = (newText: string): UpdateNewPostTextType => {
     return {
         type: UPDATE_NEW_POST_TEXT, newText: newText
+    }
+};
+
+export const sendMessageCreator = (): SendMessageType => {
+    return {
+        type: "SEND_MESSAGE"
+    }
+};
+
+export const updateNewMessageBodyCreator = (body: string): NewMessageBodyType => {
+    return {
+        type: UPDATE_NEW_MESSAGE_BODY, body: body
     }
 };
 
