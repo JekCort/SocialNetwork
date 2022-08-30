@@ -2,19 +2,20 @@ import React from 'react';
 import classes from './Profile.module.css';
 import {MyPosts} from "./MyPosts/MyPosts";
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
-import {ActionsType, dialogsPagePropsType, profilePagePropsType} from "../../redax/store";
-import {EmptyObject, Store} from "redux";
+import {ActionsType, postsPropsType, profilePagePropsType} from "../../redax/state";
 
-export type ProfileType = {
-    store: Store<EmptyObject & { profilepage: profilePagePropsType, dialogspage: dialogsPagePropsType }, ActionsType>
+type ProfilePropsType = {
+    profilePage: profilePagePropsType
+    dispatch: (action: ActionsType) => void
 }
-export const Profile = (props: ProfileType) => {
-    let state = props.store.getState().profilepage
+
+export const Profile = (props: ProfilePropsType) => {
+
 
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts posts={state.posts} newPostText={state.newPostText} dispatch={props.store.dispatch} />
+            <MyPosts posts={props.profilePage.posts} newPostText={props.profilePage.newPostText} dispatch={props.dispatch} />
         </div>
     );
 };

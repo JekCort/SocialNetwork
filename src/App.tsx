@@ -8,17 +8,19 @@ import {Route} from "react-router-dom";
 import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
-import {ActionsType, dialogsPagePropsType, profilePagePropsType, statePropsType, storePropsType} from "./redax/store";
-import {EmptyObject, Store} from "redux";
+import {ActionsType, statePropsType, storePropsType} from "./redax/state";
 
 type AppPropsType = {
     state:statePropsType
-    store: Store<EmptyObject & {profilepage: profilePagePropsType, dialogspage: dialogsPagePropsType}, ActionsType>
+    store:storePropsType
     dispatch:(action: ActionsType)=>void
 }
 const App = (props: AppPropsType) => {
+
     const HandlerDialogs = () => <Dialogs store={props.store}/>
-    const HandlerProfile = () => <Profile store={props.store}/>
+    const HandlerProfile = () => <Profile profilePage={props.state.profilePage}
+                                          dispatch={props.dispatch}
+    />
     return (
 
         <div className='app-wrapper'>

@@ -4,7 +4,7 @@ import {Posts} from "./Post/Posts";
 import {
     ActionsType,
     postPropsType,
-} from "../../../redax/store";
+} from "../../../redax/state";
 import {addPostActionCreator, updateNewPostCreator} from "../../../redax/profile-reduser";
 
 type MyPostsPropsType = {
@@ -13,7 +13,11 @@ type MyPostsPropsType = {
     dispatch: (action: ActionsType) => void
 }
 
+
+
+
 export const MyPosts = (props: MyPostsPropsType) => {
+
     const postsElements = props.posts.map(p => <Posts message={p.message} likesCount={p.likesCount}/>)
 
     const newPostElement = React.createRef<HTMLTextAreaElement>()

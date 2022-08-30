@@ -1,17 +1,9 @@
-import {ActionsType, AddPostActionType, profilePagePropsType, statePropsType, UpdateNewPostTextType} from "./store";
+import {ActionsType, AddPostActionType, profilePagePropsType, statePropsType, UpdateNewPostTextType} from "./state";
 
-const initialState:profilePagePropsType = {
-        posts: [
-            {id: 1, message: "Hi, how are you?", likesCount: 15},
-            {id: 2, message: "It's my first post", likesCount: 7}
-        ],
-        newPostText: 'It-kamasutra'
-    }
+export const profileReduser = (state:profilePagePropsType, action:ActionsType):profilePagePropsType => {
 
-export const profileReduser = (state= initialState, action:ActionsType):profilePagePropsType => {
     switch (action.type){
         case 'ADD_POST':
-
             const newPost = {
                 id: 5,
                 message: state.newPostText,
@@ -32,11 +24,11 @@ export const profileReduser = (state= initialState, action:ActionsType):profileP
 export const addPostActionCreator = (): AddPostActionType => {
     return {
         type: 'ADD_POST'
-    }
+    } as const
 };
 
 export const updateNewPostCreator = (newText: string): UpdateNewPostTextType => {
     return {
         type: 'UPDATE_NEW_POST_TEXT', newText: newText
-    }
+    } as const
 };
