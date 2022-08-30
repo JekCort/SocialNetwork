@@ -3,17 +3,21 @@ import classes from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from './Message/Message';
 import {
+    ActionsType,
+    dialogsPagePropsType,
+    profilePagePropsType,
     storePropsType,
-} from "../../redax/state";
+} from "../../redax/store";
 import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redax/dialogs-reduser";
+import {EmptyObject, Store} from "redux";
 
 
-type DialogsType = {
-    store:storePropsType
+export type DialogsType = {
+    store: Store<EmptyObject & { profilepage: profilePagePropsType, dialogspage: dialogsPagePropsType }, ActionsType>
 }
 
 export const Dialogs = (props: DialogsType) => {
-    let state = props.store.getState().dialogsPage
+    let state = props.store.getState().dialogspage
 
     const dialogsItems = state.dialogs
         .map(d => <DialogItem name={d.name} id={d.id}/>)
@@ -42,10 +46,13 @@ export const Dialogs = (props: DialogsType) => {
             <div className={classes.messages}>
                 <div>{messagesElement}</div>
                 <div>
-                    <div><textarea
-                        value={newMessageBody}
-                        onChange={onChangeHandler}
-                        placeholder='Enter your message'></textarea></div>
+                    <div>
+                        <textarea
+                            value={newMessageBody}
+                            onChange={onChangeHandler}
+                            placeholder='Enter your message'>
+                        </textarea>
+                    </div>
                     <div>
                         <button onClick={onClickHandler}>Send</button>
                     </div>

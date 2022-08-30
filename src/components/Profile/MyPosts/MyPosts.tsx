@@ -4,7 +4,7 @@ import {Posts} from "./Post/Posts";
 import {
     ActionsType,
     postPropsType,
-} from "../../../redax/state";
+} from "../../../redax/store";
 import {addPostActionCreator, updateNewPostCreator} from "../../../redax/profile-reduser";
 
 type MyPostsPropsType = {
