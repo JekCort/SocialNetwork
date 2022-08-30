@@ -10,14 +10,14 @@ import {Music} from "./components/Music/Music";
 import {Settings} from "./components/Settings/Settings";
 import {ActionsType, dialogsPagePropsType, profilePagePropsType, statePropsType, storePropsType} from "./redax/store";
 import {EmptyObject, Store} from "redux";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 type AppPropsType = {
-    state:statePropsType
-    store: Store<EmptyObject & {profilepage: profilePagePropsType, dialogspage: dialogsPagePropsType}, ActionsType>
-    dispatch:(action: ActionsType)=>void
+    store: Store<EmptyObject & {profilePage: profilePagePropsType, dialogsPage: dialogsPagePropsType}, ActionsType>
+
 }
 const App = (props: AppPropsType) => {
-    const HandlerDialogs = () => <Dialogs store={props.store}/>
+    const HandlerDialogs = () => <DialogsContainer store={props.store}/>
     const HandlerProfile = () => <Profile store={props.store}/>
     return (
 

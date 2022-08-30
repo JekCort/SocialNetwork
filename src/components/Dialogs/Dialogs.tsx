@@ -2,22 +2,18 @@ import React from 'react';
 import classes from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from './Message/Message';
-import {
-    ActionsType,
-    dialogsPagePropsType,
-    profilePagePropsType,
-    storePropsType,
-} from "../../redax/store";
-import {sendMessageCreator, updateNewMessageBodyCreator} from "../../redax/dialogs-reduser";
-import {EmptyObject, Store} from "redux";
+import {dialogsPagePropsType} from "../../redax/store";
+
 
 
 export type DialogsType = {
-    store: Store<EmptyObject & { profilepage: profilePagePropsType, dialogspage: dialogsPagePropsType }, ActionsType>
+    updateNewMessageBody:(body:string) => void
+    sendMessage:() => void
+    dialogsPage:dialogsPagePropsType
 }
 
 export const Dialogs = (props: DialogsType) => {
-    let state = props.store.getState().dialogspage
+    const state = props.dialogsPage
 
     const dialogsItems = state.dialogs
         .map(d => <DialogItem name={d.name} id={d.id}/>)
@@ -29,12 +25,12 @@ export const Dialogs = (props: DialogsType) => {
     const newMessageBody = state.NewMessageBody
 
     const onClickHandler = () => {
-        props.store.dispatch(sendMessageCreator())
+        props.sendMessage()
     }
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         const body = e.target.value
-        props.store.dispatch(updateNewMessageBodyCreator(body))
+        props.updateNewMessageBody(body)
     }
 
     return (

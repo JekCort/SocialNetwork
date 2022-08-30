@@ -1,16 +1,16 @@
 import React from 'react';
 import classes from './MyPosts.module.css';
 import {Posts} from "./Post/Posts";
-import {
-    ActionsType,
-    postPropsType,
-} from "../../../redax/store";
-import {addPostActionCreator, updateNewPostCreator} from "../../../redax/profile-reduser";
+import {postPropsType, profilePagePropsType} from "../../../redax/store";
+
 
 type MyPostsPropsType = {
+    updateNewPostText:(text:string) =>void
+    addPost:()=> void
     posts: Array<postPropsType>
-    newPostText: string
-    dispatch: (action: ActionsType) => void
+    newPostText:string
+
+
 }
 
 
@@ -22,14 +22,15 @@ export const MyPosts = (props: MyPostsPropsType) => {
 
     const newPostElement = React.createRef<HTMLTextAreaElement>()
 
-    const addPost = () => {
-        props.dispatch(addPostActionCreator())
+    const onAddPost = () => {
+          props.addPost()
 
     }
 
     const onChangeHandler = () => {
         const text = newPostElement.current?.value || ''
-        props.dispatch(updateNewPostCreator(text))
+        props.updateNewPostText(text)
+
     }
     return (
 
@@ -40,7 +41,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
                     <textarea onChange={onChangeHandler} ref={newPostElement} value={props.newPostText}/>
                 </div>
                 <div>
-                    <button onClick={addPost}>Add post</button>
+                    <button onClick={onAddPost}>Add post</button>
                 </div>
             </div>
             <div className={classes.posts}>
