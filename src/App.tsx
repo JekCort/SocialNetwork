@@ -16,9 +16,11 @@ type AppPropsType = {
     store: Store<EmptyObject & {profilePage: profilePagePropsType, dialogsPage: dialogsPagePropsType}, ActionsType>
 
 }
-const App = (props: AppPropsType) => {
-    const HandlerDialogs = () => <DialogsContainer store={props.store}/>
-    const HandlerProfile = () => <Profile store={props.store}/>
+const App = () => {
+    // const HandlerDialogs = () => <DialogsContainer store={props.store}/>
+    // const HandlerProfile = () => <Profile store={props.store}/>
+    const HandlerDialogs = () => <DialogsContainer/>
+    const HandlerProfile = () => <Profile/>
     return (
 
         <div className='app-wrapper'>

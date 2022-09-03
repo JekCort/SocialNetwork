@@ -9,13 +9,13 @@ import {MyPostsContainer} from "./MyPosts/MyPostsContainer";
 export type ProfileType = {
     store: Store<EmptyObject & { profilePage: profilePagePropsType, dialogsPage: dialogsPagePropsType }, ActionsType>
 }
-export const Profile = (props: ProfileType) => {
+export const Profile = () => {
     // let state = props.store.getState().profilepage
 
     return (
         <div>
             <ProfileInfo/>
-            <MyPostsContainer store={props.store}  />
+            <MyPostsContainer/>
         </div>
     );
 };
