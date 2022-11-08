@@ -1,14 +1,27 @@
-import {ActionsType, AddPostActionType, profilePagePropsType, statePropsType, UpdateNewPostTextType} from "./store";
+import {
+    ActionsType,
+    AddPostActionType,
+    postPropsType,
+    profilePagePropsType,
+    statePropsType,
+    UpdateNewPostTextType
+} from "./store";
 
-const initialState:profilePagePropsType = {
-    posts: [
-        {id: 1, message: "Hi, how are you?", likesCount: 15},
-        {id: 2, message: "It's my first post", likesCount: 7}
-    ],
+
+
+export type initialStateType = {
+    posts: Array<postPropsType>
+    newPostText:string
+}
+
+
+ const initialState: initialStateType = {
+    posts: [],
     newPostText: 'It-kamasutra'
 }
 
-export const profileReduser = (state= initialState, action:ActionsType):profilePagePropsType => {
+
+export const profileReduser = (state= initialState, action:ActionsType):initialStateType => {
     switch (action.type){
         case 'ADD_POST':
 
