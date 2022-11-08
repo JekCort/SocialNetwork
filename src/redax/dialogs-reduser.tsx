@@ -20,14 +20,23 @@ export type initialStateType = {
 export const dialogsReduser = (state = initialState, action: ActionsType): initialStateType => {
 
     switch (action.type) {
-        case 'UPDATE_NEW_MESSAGE_BODY':
-            state.NewMessageBody = action.body
-            return state
-        case 'SEND_MESSAGE':
-            const body = state.NewMessageBody
-            state.NewMessageBody = ''
-            state.messages.push({id: 6, message: body})
-            return state
+        case 'UPDATE_NEW_MESSAGE_BODY':{
+            const stateCopy = {...state}
+
+            stateCopy.NewMessageBody = action.body
+            return stateCopy
+        }
+
+        case 'SEND_MESSAGE':{
+            const stateCopy = {...state}
+            stateCopy.messages = [...state.messages]
+            const body = stateCopy.NewMessageBody
+            stateCopy.NewMessageBody = ''
+            stateCopy.messages.push({id: 6, message: body})
+            return stateCopy
+        }
+
+
         default:
             return state
     }
