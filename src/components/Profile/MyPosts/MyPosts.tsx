@@ -5,15 +5,13 @@ import {postPropsType, profilePagePropsType} from "../../../redax/store";
 
 
 type MyPostsPropsType = {
-    updateNewPostText:(text:string) =>void
-    addPost:()=> void
+    updateNewPostText: (text: string) => void
+    addPost: () => void
     posts: Array<postPropsType>
-    newPostText:string
+    newPostText: string
 
 
 }
-
-
 
 
 export const MyPosts = (props: MyPostsPropsType) => {
@@ -23,7 +21,7 @@ export const MyPosts = (props: MyPostsPropsType) => {
     const newPostElement = React.createRef<HTMLTextAreaElement>()
 
     const onAddPost = () => {
-          props.addPost()
+        props.addPost()
 
     }
 
@@ -38,7 +36,9 @@ export const MyPosts = (props: MyPostsPropsType) => {
             <h3>My posts</h3>
             <div>
                 <div>
-                    <textarea onChange={onChangeHandler} ref={newPostElement} value={props.newPostText}/>
+                    <textarea onChange={onChangeHandler}
+                              ref={newPostElement}
+                              value={props.newPostText}/>
                 </div>
                 <div>
                     <button onClick={onAddPost}>Add post</button>

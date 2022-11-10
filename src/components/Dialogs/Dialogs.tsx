@@ -16,11 +16,11 @@ export const Dialogs = (props: DialogsType) => {
     const state = props.dialogsPage
 
     const dialogsItems = state.dialogs
-        .map(d => <DialogItem name={d.name} id={d.id}/>)
+        .map(d => <DialogItem name={d.name} key={d.id} id={d.id}/>)
 
 
     const messagesElement = state.messages
-        .map(m => <Message massage={m.message}/>)
+        .map(m => <Message massage={m.message} key={m.id}/>)
 
     const newMessageBody = state.NewMessageBody
 
