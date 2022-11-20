@@ -11,6 +11,8 @@ import {Settings} from "./components/Settings/Settings";
 import {ActionsType, dialogsPagePropsType, profilePagePropsType, statePropsType, storePropsType} from "./redax/store";
 import {EmptyObject, Store} from "redux";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
+import {Users} from "./components/Users/Users";
+import {UsersContainer} from "./components/Users/UsersContainer";
 
 type AppPropsType = {
     store: Store<EmptyObject & {profilePage: profilePagePropsType, dialogsPage: dialogsPagePropsType}, ActionsType>
@@ -29,6 +31,7 @@ const App = () => {
             <div className='app-wrapper-content'>
                 <Route path="/DialogsItem" render={HandlerDialogs}/>
                 <Route path="/Profile" render={HandlerProfile}/>
+                <Route path="/Users" render={()=><UsersContainer/>}/>
                 <Route path="/News" component={News}/>
                 <Route path="/Music" component={Music}/>
                 <Route path="/Settings" component={Settings}/>

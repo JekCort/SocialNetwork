@@ -1,11 +1,13 @@
 import React from 'react';
-import {addPostActionCreator, initialStateType, updateNewPostCreator} from "../../../redax/profile-reduser";
+import {addPostActionCreator, updateNewPostCreator} from "../../../redax/profile-reduser";
 import {MyPosts} from "./MyPosts";
 import {connect} from "react-redux";
 import {AppStateType} from "../../../redax/redux-store";
 
 import {Dispatch} from "redux";
 import {postPropsType} from "../../../redax/store";
+
+
 
 
 type mapStateToPropsType = {

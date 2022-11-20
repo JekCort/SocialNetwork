@@ -1,5 +1,6 @@
 import {profileReduser} from "./profile-reduser";
 import {dialogsReduser} from "./dialogs-reduser";
+import {followAC} from "./users-reduser";
 
 
 export type postPropsType = {
@@ -38,11 +39,31 @@ export type dialogsPagePropsType = {
     dialogs: Array<dialogPropsType>
     NewMessageBody: string
 }
+export type usersPageType = {
 
+}
 
+export type usersPagePropsType = {
+    users: Array<userPropsType>
+}
+
+export type userPropsType = {
+    id: number
+    photoUrl:string
+    followed: boolean
+    fullName: string
+    status: string
+    location: locationType
+}
+
+type locationType = {
+    city: string
+    country: string
+}
 export type statePropsType = {
     profilePage: profilePagePropsType
     dialogsPage: dialogsPagePropsType
+    usersPage: usersPagePropsType
 }
 
 export type AddPostActionType = {
@@ -63,8 +84,21 @@ export type SendMessageType = {
     type: 'SEND_MESSAGE'
 
 }
+export type followActionType = {
+    type: 'FOLLOW'
+    userId:number
+}
 
-export type ActionsType = AddPostActionType | UpdateNewPostTextType | NewMessageBodyType | SendMessageType
+export type unfollowActionType = {
+    type: 'UNFOLLOW'
+    userId:number
+}
+
+export type setUsersActionType = {
+    type: 'SET_USERS'
+    users: Array<userPropsType>
+}
+export type ActionsType = AddPostActionType | UpdateNewPostTextType | NewMessageBodyType | SendMessageType | followActionType | unfollowActionType | setUsersActionType
 
 
 export type  storePropsType = {
@@ -105,6 +139,15 @@ export const store: storePropsType = {
             ],
             NewMessageBody: ''
         },
+        usersPage: {
+            users: [
+                {id: 1, photoUrl: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fpokemon.fandom.com%2Fru%2Fwiki%2F%25D0%259F%25D1%2581%25D0%25B0%25D0%25B9%25D0%25B4%25D0%25B0%25D0%25BA&psig=AOvVaw1K1gcMQZR_3JL27p6-2txW&ust=1668952843876000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCOCfhf2zuvsCFQAAAAAdAAAAABAE', followed: false, fullName: 'Dmitry', status: 'i am a boss', location: {city: 'Minsk', country: 'Belarus'}},
+                {id: 2, photoUrl: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fpokemon.fandom.com%2Fru%2Fwiki%2F%25D0%259F%25D1%2581%25D0%25B0%25D0%25B9%25D0%25B4%25D0%25B0%25D0%25BA&psig=AOvVaw1K1gcMQZR_3JL27p6-2txW&ust=1668952843876000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCOCfhf2zuvsCFQAAAAAdAAAAABAE', followed: true, fullName: 'Anna', status: 'i am a boss', location: {city: 'Moscow', country: 'Russia'}},
+                {id: 3, photoUrl: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fpokemon.fandom.com%2Fru%2Fwiki%2F%25D0%259F%25D1%2581%25D0%25B0%25D0%25B9%25D0%25B4%25D0%25B0%25D0%25BA&psig=AOvVaw1K1gcMQZR_3JL27p6-2txW&ust=1668952843876000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCOCfhf2zuvsCFQAAAAAdAAAAABAE', followed: false, fullName: 'Bob', status: 'i am a boss', location: {city: 'Kiev', country: 'Ukrain'}},
+            ]
+        }
+
+
     },
     _callSubscriber(state: statePropsType) {
         console.log('sdsd')
@@ -119,13 +162,11 @@ export const store: storePropsType = {
 
     dispatch(action) {
 
-        profileReduser(this._state.profilePage ,action)
+        profileReduser(this._state.profilePage, action)
         this._state.dialogsPage = dialogsReduser(this._state.dialogsPage, action)
-        this. _callSubscriber(this._state)
+        this._callSubscriber(this._state)
     }
 }
-
-
 
 
 export const sendMessageCreator = (): SendMessageType => {
