@@ -49,9 +49,10 @@ export type usersPagePropsType = {
 
 export type userPropsType = {
     id: number
-    photoUrl:string
+    photos: { "small": null,
+        "large": null }
     followed: boolean
-    fullName: string
+    name: string
     status: string
     location: locationType
 }
@@ -141,9 +142,9 @@ export const store: storePropsType = {
         },
         usersPage: {
             users: [
-                {id: 1, photoUrl: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fpokemon.fandom.com%2Fru%2Fwiki%2F%25D0%259F%25D1%2581%25D0%25B0%25D0%25B9%25D0%25B4%25D0%25B0%25D0%25BA&psig=AOvVaw1K1gcMQZR_3JL27p6-2txW&ust=1668952843876000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCOCfhf2zuvsCFQAAAAAdAAAAABAE', followed: false, fullName: 'Dmitry', status: 'i am a boss', location: {city: 'Minsk', country: 'Belarus'}},
-                {id: 2, photoUrl: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fpokemon.fandom.com%2Fru%2Fwiki%2F%25D0%259F%25D1%2581%25D0%25B0%25D0%25B9%25D0%25B4%25D0%25B0%25D0%25BA&psig=AOvVaw1K1gcMQZR_3JL27p6-2txW&ust=1668952843876000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCOCfhf2zuvsCFQAAAAAdAAAAABAE', followed: true, fullName: 'Anna', status: 'i am a boss', location: {city: 'Moscow', country: 'Russia'}},
-                {id: 3, photoUrl: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fpokemon.fandom.com%2Fru%2Fwiki%2F%25D0%259F%25D1%2581%25D0%25B0%25D0%25B9%25D0%25B4%25D0%25B0%25D0%25BA&psig=AOvVaw1K1gcMQZR_3JL27p6-2txW&ust=1668952843876000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCOCfhf2zuvsCFQAAAAAdAAAAABAE', followed: false, fullName: 'Bob', status: 'i am a boss', location: {city: 'Kiev', country: 'Ukrain'}},
+                {id: 1, photos: {small: null, large: null}, followed: false, name: 'Dmitry', status: 'i am a boss', location: {city: 'Minsk', country: 'Belarus'}},
+                {id: 2, photos: {small: null, large: null}, followed: true, name: 'Anna', status: 'i am a boss', location: {city: 'Moscow', country: 'Russia'}},
+                {id: 3,  photos: {small: null, large: null}, followed: false, name: 'Bob', status: 'i am a boss', location: {city: 'Kiev', country: 'Ukrain'}},
             ]
         }
 
