@@ -18,7 +18,6 @@ constructor(props:UsersPropsType) {
         })
     }
 
-
     render(){
         return <div>
 
