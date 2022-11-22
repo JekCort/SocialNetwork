@@ -1,6 +1,6 @@
 import {profileReduser} from "./profile-reduser";
 import {dialogsReduser} from "./dialogs-reduser";
-import {followAC} from "./users-reduser";
+import {followAC, setCurrentPageAC} from "./users-reduser";
 
 
 export type postPropsType = {
@@ -99,7 +99,16 @@ export type setUsersActionType = {
     type: 'SET_USERS'
     users: Array<userPropsType>
 }
-export type ActionsType = AddPostActionType | UpdateNewPostTextType | NewMessageBodyType | SendMessageType | followActionType | unfollowActionType | setUsersActionType
+
+export type setCurrentPageActionType = {
+    type: 'SET_CURRENT_PAGE'
+    currentPage: number
+}
+export type setTotalUserCountActionType = {
+    type: 'SET_TOTAL_USER_COUNT'
+    totalCount: number
+}
+export type ActionsType = AddPostActionType | UpdateNewPostTextType | NewMessageBodyType | SendMessageType | followActionType | unfollowActionType | setUsersActionType | setCurrentPageActionType |setTotalUserCountActionType
 
 
 export type  storePropsType = {
