@@ -108,7 +108,11 @@ export type setTotalUserCountActionType = {
     type: 'SET_TOTAL_USER_COUNT'
     totalCount: number
 }
-export type ActionsType = AddPostActionType | UpdateNewPostTextType | NewMessageBodyType | SendMessageType | followActionType | unfollowActionType | setUsersActionType | setCurrentPageActionType |setTotalUserCountActionType
+export type setToggleIsFetchingActionType = {
+    type: 'TOGGLE_IS_FETCHING'
+    isFetching: boolean
+}
+export type ActionsType = AddPostActionType | UpdateNewPostTextType | NewMessageBodyType | SendMessageType | followActionType | unfollowActionType | setUsersActionType | setCurrentPageActionType |setTotalUserCountActionType | setToggleIsFetchingActionType
 
 
 export type  storePropsType = {
