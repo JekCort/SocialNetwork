@@ -1,6 +1,6 @@
 import {profileReduser} from "./profile-reduser";
 import {dialogsReduser} from "./dialogs-reduser";
-import {followAC, setCurrentPageAC} from "./users-reduser";
+
 
 
 export type postPropsType = {

@@ -3,17 +3,17 @@ import {connect} from "react-redux";
 import {userPropsType} from "../../redax/store";
 import {AppStateType} from "../../redax/redux-store";
 import {
-    followAC,
+    follow,
     initialStateType,
-    setCurrentPageAC, setToggleIsFetchingAC,
-    setTotalUserCountAC,
-    setUsersAC,
-    unfollowAC
+    setCurrentPage, setToggleIsFetching,
+    setTotalUserCount,
+    setUsers,
+    unfollow
 } from "../../redax/users-reduser";
-import {Dispatch} from "redux";
+
 import axios from "axios";
 import {Users} from "./Users";
-import { Preloader } from '../common/Preloader/Preloader';
+import {Preloader} from '../common/Preloader/Preloader';
 
 
 export type mapStateToPropsType = {
@@ -30,7 +30,7 @@ export type mapDispatchToPropsType = {
     setUsers: (users: Array<userPropsType>) => void
     setCurrentPage: (currentPage: number) => void
     setTotalUserCount: (totalCount: number) => void
-    setToggleIsFetchingAC: (isFetching: boolean) => void
+    setToggleIsFetching: (isFetching: boolean) => void
 }
 
 
@@ -43,9 +43,9 @@ export class UsersAPIComponent extends React.Component<UsersAPIComponentPropsTyp
     }
 
     componentDidMount() {
-        this.props.setToggleIsFetchingAC(true)
+        this.props.setToggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
-            this.props.setToggleIsFetchingAC(false)
+            this.props.setToggleIsFetching(false)
             this.props.setUsers(response.data.items)
             this.props.setTotalUserCount(response.data.totalCount)
         })
@@ -56,7 +56,7 @@ export class UsersAPIComponent extends React.Component<UsersAPIComponentPropsTyp
 
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
             .then(response => {
-                this.props.setToggleIsFetchingAC(false)
+                this.props.setToggleIsFetching(false)
                 this.props.setUsers(response.data.items)
 
             })
@@ -93,28 +93,35 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
-    return {
-        follow: (userId: number) => {
-            dispatch(followAC(userId))
-        },
-        unfollow: (userId: number) => {
-            dispatch(unfollowAC(userId))
-        },
-        setUsers: (users: Array<userPropsType>) => {
-            dispatch(setUsersAC(users))
-        },
-        setCurrentPage: (currentPage: number) => {
-            dispatch(setCurrentPageAC(currentPage))
-        },
-        setTotalUserCount: (totalCount: number) => {
-            dispatch(setTotalUserCountAC(totalCount))
-        },
-        setToggleIsFetchingAC: (isFetching: boolean) => {
-            dispatch(setToggleIsFetchingAC(isFetching))
-        }
-    }
+// const mapDispatchToProps = (dispatch: Dispatch): mapDispatchToPropsType => {
+//     return {
+//         follow: (userId: number) => {
+//             dispatch(followAC(userId))
+//         },
+//         unfollow: (userId: number) => {
+//             dispatch(unfollowAC(userId))
+//         },
+//         setUsers: (users: Array<userPropsType>) => {
+//             dispatch(setUsersAC(users))
+//         },
+//         setCurrentPage: (currentPage: number) => {
+//             dispatch(setCurrentPageAC(currentPage))
+//         },
+//         setTotalUserCount: (totalCount: number) => {
+//             dispatch(setTotalUserCountAC(totalCount))
+//         },
+//         setToggleIsFetchingAC: (isFetching: boolean) => {
+//             dispatch(setToggleIsFetchingAC(isFetching))
+//         }
+//     }
+// }
 
-}
-
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPIComponent)
+export const UsersContainer = connect(mapStateToProps,
+    {
+        follow,
+        unfollow,
+        setUsers,
+        setCurrentPage,
+        setTotalUserCount,
+        setToggleIsFetching
+    })(UsersAPIComponent)
