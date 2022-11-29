@@ -2,6 +2,7 @@ import React from 'react';
 import styles from "./Users.module.css";
 import userPhoto from "../../assets/images/user.png";
 import {initialStateType} from "../../redax/users-reduser";
+import { NavLink } from 'react-router-dom';
 
 
 
@@ -38,7 +39,9 @@ export const Users = (props: UsersPropsType) => {
             {props.users.users.map(u => <div key={u.id}>
                 <div>
                     <div>
+                        <NavLink to={'/Profile'}>
                         <img width='100px' src={u.photos.small != null ? u.photos.small : userPhoto} alt="image"/>
+                        </NavLink>
                     </div>
                     <div>
                         {u.followed

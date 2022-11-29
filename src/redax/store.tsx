@@ -1,4 +1,4 @@
-import {profileReduser} from "./profile-reduser";
+import {profileReduser, ProfileType, setUserProfile} from "./profile-reduser";
 import {dialogsReduser} from "./dialogs-reduser";
 
 
@@ -112,7 +112,11 @@ export type setToggleIsFetchingActionType = {
     type: 'TOGGLE_IS_FETCHING'
     isFetching: boolean
 }
-export type ActionsType = AddPostActionType | UpdateNewPostTextType | NewMessageBodyType | SendMessageType | followActionType | unfollowActionType | setUsersActionType | setCurrentPageActionType |setTotalUserCountActionType | setToggleIsFetchingActionType
+export type setUserProfileActionType = {
+    type: 'SET_USER_PROFILE'
+    profile: ProfileType
+}
+export type ActionsType = AddPostActionType | UpdateNewPostTextType | NewMessageBodyType | SendMessageType | followActionType | unfollowActionType | setUsersActionType | setCurrentPageActionType |setTotalUserCountActionType | setToggleIsFetchingActionType | setUserProfileActionType
 
 
 export type  storePropsType = {
@@ -176,7 +180,7 @@ export const store: storePropsType = {
 
     dispatch(action) {
 
-        profileReduser(this._state.profilePage, action)
+
         this._state.dialogsPage = dialogsReduser(this._state.dialogsPage, action)
         this._callSubscriber(this._state)
     }

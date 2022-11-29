@@ -1,6 +1,15 @@
 import React from 'react';
+import { ProfileType } from '../../../redax/profile-reduser';
+
+
 import classes from './ProfileInfo.module.css'
-export const ProfileInfo = () => {
+
+type ProfileInfoType={
+    profile: ProfileType
+}
+
+
+export const ProfileInfo = (props:ProfileInfoType) => {
     return (
         <div>
         <div>
@@ -9,6 +18,7 @@ export const ProfileInfo = () => {
                 alt=""/>
         </div>
     <div className={classes.discriptionBlock}>
+        <img src={props.profile.photos.small} />
         ava + desc
     </div>
         </div>

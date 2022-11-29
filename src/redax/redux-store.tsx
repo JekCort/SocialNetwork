@@ -1,4 +1,4 @@
-import {CombinedState, combineReducers, createStore, Reducer} from "redux";
+import { combineReducers, createStore, Reducer} from "redux";
 import {profileReduser} from "./profile-reduser";
 import {dialogsReduser} from "./dialogs-reduser";
 import {usersReducer} from "./users-reduser";
