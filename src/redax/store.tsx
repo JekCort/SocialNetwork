@@ -1,4 +1,4 @@
-import {profileReduser, ProfileType, setUserProfile} from "./profile-reduser";
+import {profileReduser, ProfileType} from "./profile-reduser";
 import {dialogsReduser} from "./dialogs-reduser";
 
 

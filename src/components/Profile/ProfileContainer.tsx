@@ -7,7 +7,7 @@ import {ProfileType} from "../../redax/profile-reduser";
 
 
 export type mapStateToPropsType = {
-    profile: any
+    profile: ProfileType
 }
 
 export type mapDispatchToPropsType = {

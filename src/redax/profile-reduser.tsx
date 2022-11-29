@@ -7,6 +7,7 @@ import {
 } from "./store";
 
 
+
 export type ProfileType = {
     aboutMe: string
     contacts: contactsType
@@ -36,8 +37,8 @@ export type initialStateType = {
     posts: Array<postPropsType>
     newPostText: string
     profile: ProfileType
-}
 
+}
 
 const initialState: initialStateType = {
     posts: [],
@@ -58,7 +59,6 @@ export const profileReduser = (state = initialState, action: ActionsType): initi
                 ...state,
                 posts: [...state.posts, newPost]
             }
-
 
         case 'UPDATE_NEW_POST_TEXT':
             return {
