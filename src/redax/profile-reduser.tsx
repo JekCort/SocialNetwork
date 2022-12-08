@@ -7,7 +7,6 @@ import {
 } from "./store";
 
 
-
 export type ProfileType = {
     aboutMe: string
     contacts: contactsType
@@ -43,7 +42,7 @@ export type initialStateType = {
 const initialState: initialStateType = {
     posts: [],
     newPostText: 'It-kamasutra',
-    profile: {}
+    profile: {} as ProfileType
 }
 
 

@@ -27,7 +27,7 @@ const App = () => {
             <Navbar/>
             <div className='app-wrapper-content'>
                 <Route path="/DialogsItem" render={HandlerDialogs}/>
-                <Route path="/Profile" render={HandlerProfile}/>
+                <Route path="/Profile/:userId" render={HandlerProfile}/>
                 <Route path="/Users" render={()=><UsersContainer/>}/>
                 <Route path="/News" component={News}/>
                 <Route path="/Music" component={Music}/>
